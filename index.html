@@ -1,0 +1,2032 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b6b57">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="EcoLex">
+  <meta name="description" content="生态学考试英语词汇闪卡、测验与复习工具">
+  <title>EcoLex · 生态学背词</title>
+  <style>
+:root {
+  --bg: #f5f7f1;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-solid: #ffffff;
+  --surface-soft: #edf3ed;
+  --text: #17352e;
+  --muted: #6c7d77;
+  --line: #dbe4dd;
+  --green: #0b6b57;
+  --green-2: #129372;
+  --green-soft: #dcefe8;
+  --amber: #d99a2b;
+  --amber-soft: #fff0cf;
+  --danger: #c7504b;
+  --danger-soft: #fce7e4;
+  --shadow: 0 22px 60px rgba(35, 75, 63, 0.12);
+  --radius-xl: 30px;
+  --radius-lg: 22px;
+  --radius-md: 15px;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1b18;
+  --surface: rgba(22, 39, 34, 0.9);
+  --surface-solid: #172923;
+  --surface-soft: #20362f;
+  --text: #eef8f3;
+  --muted: #a2b9b0;
+  --line: #2e483f;
+  --green: #3bd1a5;
+  --green-2: #61dfb9;
+  --green-soft: #1d493d;
+  --amber-soft: #4d3d1f;
+  --danger-soft: #4b2928;
+  --shadow: 0 24px 65px rgba(0, 0, 0, 0.3);
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--bg);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  overflow-x: hidden;
+}
+
+button, input, select { font: inherit; }
+button { color: inherit; }
+
+.ambient {
+  position: fixed;
+  z-index: -1;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.ambient-one { top: -160px; right: 10%; background: #87d6b8; }
+.ambient-two { bottom: -220px; left: 20%; background: #e9c77e; }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  width: min(1500px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 30px 22px 24px;
+  border-right: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-solid) 78%, transparent);
+  backdrop-filter: blur(20px);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; padding: 0 8px 28px; }
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 14px 14px 14px 5px;
+  color: white;
+  background: linear-gradient(145deg, #0b6b57, #25a781);
+  box-shadow: 0 10px 25px rgba(11, 107, 87, 0.25);
+  font: 700 23px Georgia, serif;
+}
+.brand strong { display: block; font: 700 22px Georgia, serif; letter-spacing: -0.02em; }
+.brand span { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; letter-spacing: 0.14em; }
+
+.nav { display: grid; gap: 8px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 15px;
+  border: 0;
+  border-radius: 13px;
+  background: transparent;
+  color: var(--muted);
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.nav-item span { width: 24px; font-size: 21px; text-align: center; }
+.nav-item:hover { color: var(--text); background: var(--surface-soft); }
+.nav-item.active { color: var(--green); background: var(--green-soft); font-weight: 700; }
+
+.sidebar-card {
+  margin-top: auto;
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.sidebar-card-head { display: flex; justify-content: space-between; font-size: 13px; }
+.sidebar-card-head span { color: var(--muted); }
+.progress-track { height: 7px; margin: 14px 0 8px; border-radius: 999px; background: var(--surface-soft); overflow: hidden; }
+.progress-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), #48c59e); transition: width 0.4s ease; }
+.sidebar-card p { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+.sidebar-card input { width: 100%; accent-color: var(--green); }
+
+.quiet-button {
+  margin-top: 10px;
+  padding: 11px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+.quiet-button:hover { color: var(--danger); }
+
+.main { width: 100%; max-width: 1180px; margin: 0 auto; padding: 34px 48px 70px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.eyebrow { margin: 0 0 4px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+h1 { margin: 0; font: 700 clamp(29px, 3vw, 40px)/1.15 Georgia, "Noto Serif SC", serif; letter-spacing: -0.03em; }
+.top-actions { display: flex; align-items: center; gap: 12px; }
+.icon-button, .round-button {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.icon-button { width: 42px; height: 42px; border-radius: 13px; font-size: 19px; }
+.icon-button:hover, .round-button:hover { transform: translateY(-2px); border-color: var(--green); }
+.streak-pill { display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 15px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+.streak-pill span { color: var(--muted); font-size: 12px; }
+.streak-pill strong { color: var(--green); font-size: 13px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 24px; }
+.stat-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; min-height: 84px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); backdrop-filter: blur(16px); }
+.stat-dot { width: 10px; height: 38px; border-radius: 999px; }
+.dot-green { background: var(--green-2); }
+.dot-amber { background: var(--amber); }
+.dot-slate { background: #8ca098; }
+.stat-card small { display: block; color: var(--muted); font-size: 12px; }
+.stat-card strong { display: block; margin-top: 3px; font-size: 23px; }
+.stat-card em { color: var(--muted); font-size: 11px; font-style: normal; }
+
+.view { display: none; }
+.view.active { display: block; animation: fade-up 0.28s ease; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.study-toolbar, .library-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.segmented { display: flex; padding: 4px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+.segment { padding: 8px 13px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; }
+.segment.active { color: var(--green); background: var(--green-soft); font-weight: 700; }
+.select-wrap { display: flex; align-items: center; gap: 8px; margin-left: auto; color: var(--muted); font-size: 12px; }
+select, .search-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-solid);
+  color: var(--text);
+}
+select { padding: 9px 32px 9px 11px; }
+.outline-button, .primary-button { padding: 10px 14px; border-radius: 12px; cursor: pointer; transition: 0.2s ease; }
+.outline-button { border: 1px solid var(--line); background: var(--surface); }
+.outline-button:hover { border-color: var(--green); color: var(--green); }
+.primary-button { border: 0; color: white; background: var(--green); font-weight: 700; }
+.primary-button:hover { background: var(--green-2); }
+
+.study-stage { max-width: 820px; margin: 0 auto; }
+.card-meta { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 10px; color: var(--muted); font-size: 12px; }
+.category-chip { display: inline-flex; align-items: center; min-height: 26px; padding: 5px 10px; border-radius: 999px; color: var(--green); background: var(--green-soft); font-size: 11px; font-weight: 700; }
+.flashcard { position: relative; height: 470px; outline: none; perspective: 1500px; cursor: pointer; }
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 38px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, var(--green));
+  border-radius: var(--radius-xl);
+  background: var(--surface-solid);
+  box-shadow: var(--shadow);
+  backface-visibility: hidden;
+  transition: transform 0.62s cubic-bezier(.2,.7,.2,1);
+  overflow: hidden;
+}
+.card-face::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--green-soft), transparent 70%);
+}
+.card-back { transform: rotateY(180deg); }
+.flashcard.flipped .card-front { transform: rotateY(-180deg); }
+.flashcard.flipped .card-back { transform: rotateY(0); }
+.card-tools { position: absolute; top: 22px; right: 22px; display: flex; gap: 8px; z-index: 2; }
+.round-button { width: 39px; height: 39px; border-radius: 50%; font-size: 17px; }
+.round-button.starred { color: #d49a1b; background: var(--amber-soft); border-color: #dfb65c; }
+.hint { margin: 0 0 13px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; }
+.flashcard h2, .quiz-card h2 { max-width: 95%; margin: 0; font: 700 clamp(40px, 6vw, 68px)/1.12 Georgia, "Times New Roman", serif; text-align: center; letter-spacing: -0.035em; overflow-wrap: anywhere; }
+.phrase-hint { margin: 16px 0 34px; color: var(--muted); font-size: 14px; }
+.reveal-button { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: transparent; cursor: pointer; }
+kbd { padding: 3px 7px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; color: var(--muted); background: var(--surface-soft); font-size: 10px; }
+.answer-word { margin-top: 15px; color: var(--green); font: italic 20px Georgia, serif; }
+.rating-prompt { margin: 30px 0 11px; color: var(--muted); font-size: 12px; }
+.rating-grid { display: grid; grid-template-columns: repeat(3, minmax(120px, 1fr)); width: min(560px, 100%); gap: 10px; }
+.rating { display: grid; grid-template-columns: auto 1fr; gap: 0 9px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); text-align: left; cursor: pointer; }
+.rating b { grid-row: 1 / 3; align-self: center; display: grid; width: 26px; height: 26px; place-items: center; border-radius: 8px; background: var(--surface-soft); font-size: 11px; }
+.rating span { font-size: 12px; font-weight: 700; }
+.rating small { color: var(--muted); font-size: 9px; }
+.rating.again:hover { border-color: var(--danger); background: var(--danger-soft); }
+.rating.hard:hover { border-color: var(--amber); background: var(--amber-soft); }
+.rating.known:hover { border-color: var(--green); background: var(--green-soft); }
+.keyboard-tip { margin: 15px 0 0; color: var(--muted); font-size: 11px; text-align: center; }
+
+.empty-state { max-width: 600px; margin: 70px auto; padding: 55px; border: 1px dashed var(--line); border-radius: var(--radius-lg); text-align: center; background: var(--surface); }
+.empty-state > span { display: grid; width: 52px; height: 52px; margin: 0 auto 15px; place-items: center; border-radius: 50%; color: white; background: var(--green); font-size: 24px; }
+.empty-state h2 { margin: 0 0 8px; }
+.empty-state p { margin: 0; color: var(--muted); }
+
+.quiz-layout { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 18px; }
+.quiz-card, .quiz-score { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface-solid); box-shadow: var(--shadow); }
+.quiz-card { min-height: 520px; padding: 30px; }
+.quiz-head { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+.quiz-card .hint { margin-top: 55px; text-align: center; }
+.quiz-card h2 { margin: 0 auto 36px; font-size: clamp(34px, 5vw, 54px); }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.quiz-option { min-height: 66px; padding: 13px 15px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); text-align: left; cursor: pointer; }
+.quiz-option:hover { border-color: var(--green); }
+.quiz-option.correct { border-color: var(--green); background: var(--green-soft); }
+.quiz-option.wrong { border-color: var(--danger); background: var(--danger-soft); }
+.quiz-option:disabled { color: var(--text); cursor: default; }
+.quiz-feedback { min-height: 27px; margin: 18px 0 8px; text-align: center; font-size: 13px; font-weight: 700; }
+.quiz-card .primary-button { display: block; margin: 0 auto; }
+.quiz-score { align-self: start; padding: 24px; text-align: center; }
+.quiz-score > span { color: var(--muted); font-size: 12px; }
+.quiz-score > strong { display: block; margin: 12px 0 20px; color: var(--green); font: 700 46px Georgia, serif; }
+.score-split { display: flex; justify-content: space-between; margin-bottom: 20px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+.quiz-score .outline-button { width: 100%; }
+
+.search-box { display: flex; flex: 1; align-items: center; gap: 9px; min-width: 240px; padding: 0 13px; }
+.search-box span { color: var(--muted); font-size: 22px; }
+.search-box input { width: 100%; padding: 11px 0; border: 0; outline: 0; color: var(--text); background: transparent; }
+.check-label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.check-label input { accent-color: var(--green); }
+.library-summary { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+.word-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.word-row { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; padding: 15px 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+.word-row strong { font: 700 17px Georgia, serif; overflow-wrap: anywhere; }
+.word-row p { grid-column: 1; margin: 0; color: var(--muted); font-size: 12px; }
+.word-row small { grid-column: 1; color: var(--green); font-size: 9px; }
+.word-row button { grid-column: 2; grid-row: 1 / 4; align-self: center; width: 35px; height: 35px; border: 0; border-radius: 50%; background: var(--surface-soft); cursor: pointer; }
+.word-row button.starred { color: #d49a1b; background: var(--amber-soft); }
+
+.toast { position: fixed; left: 50%; bottom: 26px; z-index: 10; padding: 11px 16px; border-radius: 11px; color: white; background: #17352e; box-shadow: var(--shadow); font-size: 12px; opacity: 0; transform: translate(-50%, 20px); pointer-events: none; transition: 0.25s ease; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.hidden { display: none !important; }
+
+@media (max-width: 950px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; flex-direction: row; align-items: center; width: 100%; height: auto; padding: 12px 18px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 0; margin-right: auto; }
+  .brand span, .sidebar-card, .quiet-button { display: none; }
+  .nav { display: flex; }
+  .nav-item { width: auto; padding: 10px 12px; }
+  .nav-item span { display: none; }
+  .main { padding: 26px 24px 60px; }
+}
+
+@media (max-width: 680px) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  .sidebar { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .brand-mark { width: 36px; height: 36px; }
+  .brand strong { font-size: 18px; }
+  .nav { order: 3; width: 100%; }
+  .nav-item { flex: 1; justify-content: center; font-size: 12px; }
+  .topbar { align-items: flex-start; }
+  .streak-pill span { display: none; }
+  .stats-grid { grid-template-columns: 1fr; gap: 8px; }
+  .stat-card { min-height: 67px; }
+  .study-toolbar, .library-toolbar { align-items: stretch; flex-wrap: wrap; }
+  .segmented { width: 100%; }
+  .segment { flex: 1; }
+  .select-wrap { margin-left: 0; flex: 1; }
+  .select-wrap select { flex: 1; }
+  .main { padding: 20px 14px 46px; }
+  .flashcard { height: min(480px, 67vh); min-height: 410px; }
+  .card-face { padding: 24px 18px; }
+  .rating-grid { gap: 8px; }
+  .rating { min-height: 64px; }
+  .rating-prompt { margin-top: 20px; }
+  .quiz-layout { grid-template-columns: 1fr; }
+  .quiz-score { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+  .quiz-score > strong { margin: 8px; }
+  .score-split { grid-column: 1 / -1; }
+  .quiz-score .outline-button { grid-column: 1 / -1; }
+  .quiz-options, .word-grid { grid-template-columns: 1fr; }
+  .search-box { width: 100%; }
+  .library-toolbar select { flex: 1; }
+  .keyboard-tip { display: none; }
+}
+
+</style>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">E</div>
+        <div>
+          <strong>EcoLex</strong>
+          <span>生态学背词</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="主要功能">
+        <button class="nav-item active" data-view="study"><span>◫</span>闪卡学习</button>
+        <button class="nav-item" data-view="quiz"><span>◇</span>快速测验</button>
+        <button class="nav-item" data-view="library"><span>≡</span>完整词库</button>
+      </nav>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-head">
+          <span>今日目标</span>
+          <strong id="goalLabel">20</strong>
+        </div>
+        <div class="progress-track"><span id="goalProgress"></span></div>
+        <p><span id="todayCount">0</span> / <span id="dailyGoalText">20</span> 个已复习</p>
+        <input id="dailyGoal" type="range" min="10" max="80" step="5" value="20" aria-label="每日学习目标">
+      </div>
+
+      <button id="resetButton" class="quiet-button">重置学习记录</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Ecology vocabulary lab</p>
+          <h1 id="pageTitle">闪卡学习</h1>
+        </div>
+        <div class="top-actions">
+          <button id="themeToggle" class="icon-button" title="切换深色模式" aria-label="切换深色模式">☾</button>
+          <div class="streak-pill"><span>连续学习</span><strong id="streakCount">1 天</strong></div>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="学习统计">
+        <article class="stat-card">
+          <span class="stat-dot dot-green"></span>
+          <div><small>已掌握</small><strong id="masteredStat">0</strong></div>
+          <em id="masteredPercent">0%</em>
+        </article>
+        <article class="stat-card">
+          <span class="stat-dot dot-amber"></span>
+          <div><small>学习中</small><strong id="learningStat">0</strong></div>
+          <em>继续巩固</em>
+        </article>
+        <article class="stat-card">
+          <span class="stat-dot dot-slate"></span>
+          <div><small>未学习</small><strong id="unseenStat">0</strong></div>
+          <em id="totalStat">共 0 词</em>
+        </article>
+      </section>
+
+      <section id="studyView" class="view active">
+        <div class="study-toolbar">
+          <div class="segmented" role="group" aria-label="学习范围">
+            <button class="segment active" data-scope="due">今日复习</button>
+            <button class="segment" data-scope="all">全部词汇</button>
+            <button class="segment" data-scope="starred">收藏</button>
+          </div>
+          <label class="select-wrap">
+            <span>分类</span>
+            <select id="categoryFilter" aria-label="选择词汇分类"></select>
+          </label>
+          <button id="shuffleButton" class="outline-button">随机顺序</button>
+        </div>
+
+        <div id="emptyStudy" class="empty-state hidden">
+          <span>✓</span>
+          <h2>这一组已经学完</h2>
+          <p>换个分类，或者选择“全部词汇”继续练习。</p>
+        </div>
+
+        <div id="studyStage" class="study-stage">
+          <div class="card-meta">
+            <span id="cardCategory" class="category-chip"></span>
+            <span><b id="cardIndex">1</b> / <span id="cardTotal">1</span></span>
+          </div>
+
+          <article id="flashcard" class="flashcard" tabindex="0" aria-label="单词闪卡，按空格显示答案">
+            <div class="card-face card-front">
+              <div class="card-tools">
+                <button id="speakButton" class="round-button" title="朗读" aria-label="朗读当前词汇">♪</button>
+                <button id="starButton" class="round-button" title="收藏" aria-label="收藏当前词汇">☆</button>
+              </div>
+              <p class="hint">ENGLISH</p>
+              <h2 id="englishWord">ecology</h2>
+              <p id="phraseHint" class="phrase-hint">生态学核心词汇</p>
+              <button id="revealButton" class="reveal-button">显示释义 <kbd>Space</kbd></button>
+            </div>
+            <div class="card-face card-back">
+              <div class="card-tools">
+                <button id="speakButtonBack" class="round-button" title="朗读" aria-label="朗读当前词汇">♪</button>
+                <button id="starButtonBack" class="round-button" title="收藏" aria-label="收藏当前词汇">☆</button>
+              </div>
+              <p class="hint">中文释义</p>
+              <h2 id="chineseMeaning">生态学</h2>
+              <div class="answer-word" id="answerWord">ecology</div>
+              <p class="rating-prompt">你对这个词掌握得怎么样？</p>
+              <div class="rating-grid">
+                <button class="rating again" data-rating="again"><b>1</b><span>不认识</span><small>稍后再来</small></button>
+                <button class="rating hard" data-rating="hard"><b>2</b><span>有点模糊</span><small>加强记忆</small></button>
+                <button class="rating known" data-rating="known"><b>3</b><span>认识</span><small>延长复习</small></button>
+              </div>
+            </div>
+          </article>
+          <p class="keyboard-tip">快捷键：空格翻面 · 1 不认识 · 2 模糊 · 3 认识</p>
+        </div>
+      </section>
+
+      <section id="quizView" class="view">
+        <div class="quiz-layout">
+          <article class="quiz-card">
+            <div class="quiz-head">
+              <span class="category-chip" id="quizCategory"></span>
+              <span>连续答对 <b id="quizStreak">0</b></span>
+            </div>
+            <p class="hint">请选择正确的中文释义</p>
+            <h2 id="quizWord">ecology</h2>
+            <div id="quizOptions" class="quiz-options"></div>
+            <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
+            <button id="nextQuiz" class="primary-button hidden">下一题</button>
+          </article>
+          <aside class="quiz-score">
+            <span>本轮正确率</span>
+            <strong id="quizAccuracy">0%</strong>
+            <div class="score-split"><span>正确 <b id="quizCorrect">0</b></span><span>已答 <b id="quizAnswered">0</b></span></div>
+            <button id="restartQuiz" class="outline-button">重新开始</button>
+          </aside>
+        </div>
+      </section>
+
+      <section id="libraryView" class="view">
+        <div class="library-toolbar">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="搜索英文或中文释义…">
+          </label>
+          <select id="libraryCategory" aria-label="词库分类"></select>
+          <label class="check-label"><input id="starredOnly" type="checkbox"> 只看收藏</label>
+        </div>
+        <div class="library-summary"><span id="resultCount">0</span> 个结果</div>
+        <div id="wordGrid" class="word-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+window.ECOLOGY_VOCAB = [
+  {
+    "id": 1,
+    "english": "biology",
+    "chinese": "生物学",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 2,
+    "english": "ecology",
+    "chinese": "生态学",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 3,
+    "english": "autecology",
+    "chinese": "个体生态学",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 4,
+    "english": "economy",
+    "chinese": "经济学",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 5,
+    "english": "population",
+    "chinese": "种群",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 6,
+    "english": "community",
+    "chinese": "群落",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 7,
+    "english": "succession",
+    "chinese": "演替",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 8,
+    "english": "niche",
+    "chinese": "生态位",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 9,
+    "english": "abiotic",
+    "chinese": "非生物的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 10,
+    "english": "biotic",
+    "chinese": "生物的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 11,
+    "english": "environment",
+    "chinese": "环境",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 12,
+    "english": "abiotic environment",
+    "chinese": "非生物环境",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 13,
+    "english": "abiotic factor",
+    "chinese": "非生物因子",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 14,
+    "english": "biotic factor",
+    "chinese": "生物因子",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 15,
+    "english": "edaphic factor",
+    "chinese": "土壤因子",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 16,
+    "english": "ecosystem",
+    "chinese": "生态系统",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 17,
+    "english": "biosphere",
+    "chinese": "生物圈",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 18,
+    "english": "lithosphere",
+    "chinese": "岩石圈",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 19,
+    "english": "atmosphere",
+    "chinese": "大气圈",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 20,
+    "english": "hydrosphere",
+    "chinese": "水圈",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 21,
+    "english": "consumer",
+    "chinese": "消费者",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 22,
+    "english": "producer",
+    "chinese": "生产者",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 23,
+    "english": "primary producer",
+    "chinese": "初级生产者",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 24,
+    "english": "decomposer",
+    "chinese": "分解者",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 25,
+    "english": "autotroph",
+    "chinese": "自养生物",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 26,
+    "english": "pathogen",
+    "chinese": "病原体",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 27,
+    "english": "parasitism",
+    "chinese": "寄生",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 28,
+    "english": "predation",
+    "chinese": "捕食",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 29,
+    "english": "photosynthesis",
+    "chinese": "光合作用",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 30,
+    "english": "respiration",
+    "chinese": "呼吸作用",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 31,
+    "english": "bacterium",
+    "chinese": "细菌（单数）",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 32,
+    "english": "fungus",
+    "chinese": "真菌（单数）",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 33,
+    "english": "chlorophyll",
+    "chinese": "叶绿素",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 34,
+    "english": "tissue",
+    "chinese": "组织",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 35,
+    "english": "reproduction",
+    "chinese": "繁殖",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 36,
+    "english": "macronutrient",
+    "chinese": "大量营养元素",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 37,
+    "english": "glucose",
+    "chinese": "葡萄糖",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 38,
+    "english": "RuBisCO",
+    "chinese": "核酮糖-1,5-二磷酸羧化酶/加氧酶",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 39,
+    "english": "geology",
+    "chinese": "地质学；地质状况",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 40,
+    "english": "inherent",
+    "chinese": "内在的；固有的；天生的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 41,
+    "english": "longevity",
+    "chinese": "寿命；长寿",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 42,
+    "english": "deciduous",
+    "chinese": "落叶的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 43,
+    "english": "anatomy",
+    "chinese": "解剖学；解剖结构",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 44,
+    "english": "natural selection",
+    "chinese": "自然选择",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 45,
+    "english": "hospitable",
+    "chinese": "适宜居住的；环境宜人的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 46,
+    "english": "inhospitable",
+    "chinese": "不适宜居住的；环境恶劣的",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 47,
+    "english": "gestation",
+    "chinese": "妊娠期",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 48,
+    "english": "life expectancy",
+    "chinese": "预期寿命",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 49,
+    "english": "tolerance",
+    "chinese": "耐受性",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": false
+  },
+  {
+    "id": 50,
+    "english": "phenotypic plasticity",
+    "chinese": "表型可塑性",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 51,
+    "english": "terrestrial ecology",
+    "chinese": "陆地生态学",
+    "category": "基本概念、环境与个体生态",
+    "isPhrase": true
+  },
+  {
+    "id": 52,
+    "english": "life history",
+    "chinese": "生活史",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 53,
+    "english": "offspring",
+    "chinese": "后代；子代",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 54,
+    "english": "individual",
+    "chinese": "个体",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 55,
+    "english": "organism",
+    "chinese": "生物体；有机体",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 56,
+    "english": "fluctuation",
+    "chinese": "波动",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 57,
+    "english": "genetic",
+    "chinese": "遗传的；基因的",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 58,
+    "english": "rule of thumb",
+    "chinese": "经验法则",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 59,
+    "english": "habitat",
+    "chinese": "栖息地；生境",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 60,
+    "english": "uniform dispersion",
+    "chinese": "均匀分布",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 61,
+    "english": "random dispersion",
+    "chinese": "随机分布",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 62,
+    "english": "clumped dispersion",
+    "chinese": "聚集分布；集群分布",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 63,
+    "english": "spatial pattern",
+    "chinese": "空间格局",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 64,
+    "english": "distribution",
+    "chinese": "分布；分配",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 65,
+    "english": "resource",
+    "chinese": "资源",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 66,
+    "english": "competition",
+    "chinese": "竞争",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 67,
+    "english": "intraspecific competition",
+    "chinese": "种内竞争",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 68,
+    "english": "predator",
+    "chinese": "捕食者",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 69,
+    "english": "immigration",
+    "chinese": "迁入",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 70,
+    "english": "emigration",
+    "chinese": "迁出",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 71,
+    "english": "male",
+    "chinese": "雄性",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 72,
+    "english": "female",
+    "chinese": "雌性",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 73,
+    "english": "demography",
+    "chinese": "种群统计学；人口统计学",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 74,
+    "english": "birth rate",
+    "chinese": "出生率",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 75,
+    "english": "death rate",
+    "chinese": "死亡率",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 76,
+    "english": "life table",
+    "chinese": "生命表",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 77,
+    "english": "survivorship curve",
+    "chinese": "存活曲线",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 78,
+    "english": "survival",
+    "chinese": "生存；存活",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 79,
+    "english": "quadrat",
+    "chinese": "样方",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 80,
+    "english": "recapture technique",
+    "chinese": "重捕技术",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 81,
+    "english": "mammal",
+    "chinese": "哺乳动物",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 82,
+    "english": "reproductive strategy",
+    "chinese": "生殖策略",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 83,
+    "english": "allelopathy",
+    "chinese": "化感作用",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 84,
+    "english": "allelochemical",
+    "chinese": "化感物质",
+    "category": "种群生态",
+    "isPhrase": false
+  },
+  {
+    "id": 85,
+    "english": "root exudation",
+    "chinese": "根系分泌；根系分泌物释放",
+    "category": "种群生态",
+    "isPhrase": true
+  },
+  {
+    "id": 86,
+    "english": "dynamics",
+    "chinese": "动力学；动态",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 87,
+    "english": "community dynamics",
+    "chinese": "群落动态",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 88,
+    "english": "biological community",
+    "chinese": "生物群落",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 89,
+    "english": "community composition",
+    "chinese": "群落组成",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 90,
+    "english": "keystone species",
+    "chinese": "关键种",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 91,
+    "english": "dominant species",
+    "chinese": "优势种",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 92,
+    "english": "native species",
+    "chinese": "本地物种",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 93,
+    "english": "invasive species",
+    "chinese": "入侵物种",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 94,
+    "english": "pioneer species",
+    "chinese": "先锋物种",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 95,
+    "english": "abundance",
+    "chinese": "丰度",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 96,
+    "english": "biomass",
+    "chinese": "生物量",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 97,
+    "english": "productivity",
+    "chinese": "生产力",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 98,
+    "english": "net primary productivity",
+    "chinese": "净初级生产力",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 99,
+    "english": "trophic",
+    "chinese": "营养的；营养级的",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 100,
+    "english": "trophic level",
+    "chinese": "营养级",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 101,
+    "english": "food chain",
+    "chinese": "食物链",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 102,
+    "english": "food web",
+    "chinese": "食物网",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 103,
+    "english": "trophic cascade",
+    "chinese": "营养级联",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 104,
+    "english": "herbivore",
+    "chinese": "食草动物",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 105,
+    "english": "biodiversity",
+    "chinese": "生物多样性",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 106,
+    "english": "species richness",
+    "chinese": "物种丰富度",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 107,
+    "english": "taxon",
+    "chinese": "分类单元；类群",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 108,
+    "english": "vegetation",
+    "chinese": "植被",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 109,
+    "english": "environmental gradient",
+    "chinese": "环境梯度",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 110,
+    "english": "elevational gradient",
+    "chinese": "海拔梯度",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 111,
+    "english": "diversity gradient",
+    "chinese": "多样性梯度",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 112,
+    "english": "mid-domain effect",
+    "chinese": "中域效应",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 113,
+    "english": "neutral theory",
+    "chinese": "中性理论",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 114,
+    "english": "theory of island biogeography",
+    "chinese": "岛屿生物地理学理论",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 115,
+    "english": "speciation",
+    "chinese": "物种形成",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 116,
+    "english": "extinction",
+    "chinese": "灭绝；衰减",
+    "category": "群落生态与生态系统",
+    "isPhrase": false
+  },
+  {
+    "id": 117,
+    "english": "ecological succession",
+    "chinese": "生态演替",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 118,
+    "english": "primary succession",
+    "chinese": "原生演替",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 119,
+    "english": "secondary succession",
+    "chinese": "次生演替",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 120,
+    "english": "climax community",
+    "chinese": "顶极群落",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 121,
+    "english": "lethal effect",
+    "chinese": "致死效应；杀伤效应",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 122,
+    "english": "non-lethal effect",
+    "chinese": "非致死效应",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 123,
+    "english": "biological control",
+    "chinese": "生物防治",
+    "category": "群落生态与生态系统",
+    "isPhrase": true
+  },
+  {
+    "id": 124,
+    "english": "penguin",
+    "chinese": "企鹅",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 125,
+    "english": "gerbil",
+    "chinese": "沙鼠",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 126,
+    "english": "dandelion",
+    "chinese": "蒲公英",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 127,
+    "english": "jellyfish",
+    "chinese": "水母",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 128,
+    "english": "mussel",
+    "chinese": "贻贝；蚌类",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 129,
+    "english": "barnacle",
+    "chinese": "藤壶（原图误写为 Barmacle）",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 130,
+    "english": "seaweed",
+    "chinese": "海草；海藻",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 131,
+    "english": "starfish",
+    "chinese": "海星",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 132,
+    "english": "kelp",
+    "chinese": "海带；大型褐藻",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 133,
+    "english": "sea urchin",
+    "chinese": "海胆",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 134,
+    "english": "sea otter",
+    "chinese": "海獭",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 135,
+    "english": "zooplankton",
+    "chinese": "浮游动物",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 136,
+    "english": "phytoplankton",
+    "chinese": "浮游植物",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 137,
+    "english": "planktivorous fish",
+    "chinese": "食浮游生物的鱼类",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 138,
+    "english": "oyster larvae",
+    "chinese": "牡蛎幼虫",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 139,
+    "english": "oyster reef",
+    "chinese": "牡蛎礁",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 140,
+    "english": "Phoridae",
+    "chinese": "蚤蝇科",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 141,
+    "english": "intertidal",
+    "chinese": "潮间带的",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 142,
+    "english": "terpene",
+    "chinese": "萜烯",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 143,
+    "english": "deprive",
+    "chinese": "使丧失；剥夺",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 144,
+    "english": "overfish",
+    "chinese": "过度捕捞",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": false
+  },
+  {
+    "id": 145,
+    "english": "Yellowstone National Park",
+    "chinese": "黄石国家公园",
+    "category": "生物、海洋生态及其他例词",
+    "isPhrase": true
+  },
+  {
+    "id": 146,
+    "english": "oikos",
+    "chinese": "希腊语“住所、栖息地”；ecology、economy 的词源成分",
+    "category": "图中词根词源",
+    "isPhrase": false
+  },
+  {
+    "id": 147,
+    "english": "logos",
+    "chinese": "希腊语“学问、研究”；ecology 的词源成分",
+    "category": "图中词根词源",
+    "isPhrase": false
+  },
+  {
+    "id": 148,
+    "english": "-nomy",
+    "chinese": "“管理、法则、学说”；economy 的构词成分",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 149,
+    "english": "popul-",
+    "chinese": "“人民、人口”；population 的词根",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 150,
+    "english": "-ation",
+    "chinese": "名词后缀，表示“行为、过程或结果”",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 151,
+    "english": "com-",
+    "chinese": "“共同、一起”；community 的前缀",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 152,
+    "english": "mun-",
+    "chinese": "“公共、共同”；community 的词根",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 153,
+    "english": "-ity",
+    "chinese": "名词后缀，表示“性质、状态”",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 154,
+    "english": "suc-",
+    "chinese": "“在下、随后”；succession 的前缀变体",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 155,
+    "english": "-cess-",
+    "chinese": "“行走、前进”；succession 的词根",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 156,
+    "english": "-ion",
+    "chinese": "名词后缀，表示“行为、过程或结果”",
+    "category": "图中词根词源",
+    "isPhrase": true
+  },
+  {
+    "id": 157,
+    "english": "nidus",
+    "chinese": "拉丁语“巢、窝”；niche 的远源词",
+    "category": "图中词根词源",
+    "isPhrase": false
+  },
+  {
+    "id": 158,
+    "english": "nest",
+    "chinese": "巢；帮助理解 niche 的词源含义",
+    "category": "图中词根词源",
+    "isPhrase": false
+  }
+];
+
+</script>
+<script>
+(() => {
+  "use strict";
+
+  const words = Array.isArray(window.ECOLOGY_VOCAB) ? window.ECOLOGY_VOCAB : [];
+  const STORAGE_KEY = "ecolex-state-v1";
+  const DAY = 24 * 60 * 60 * 1000;
+
+  const defaultState = {
+    progress: {},
+    starred: [],
+    dailyGoal: 20,
+    studyDates: [],
+    todayReviewed: {},
+    theme: "light"
+  };
+
+  const loadState = () => {
+    try {
+      return { ...defaultState, ...JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") };
+    } catch {
+      return { ...defaultState };
+    }
+  };
+
+  let state = loadState();
+  let currentView = "study";
+  let studyScope = "due";
+  let studyQueue = [];
+  let studyIndex = 0;
+  let shuffled = false;
+  let quizWord = null;
+  let quizLocked = false;
+  let quizStats = { correct: 0, answered: 0, streak: 0 };
+
+  const $ = (selector) => document.querySelector(selector);
+  const $ = (selector) => [...document.querySelectorAll(selector)];
+  const todayKey = () => new Date().toISOString().slice(0, 10);
+  const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  const byId = (id) => words.find((word) => word.id === Number(id));
+  const shuffledCopy = (items) => {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };
+
+  function toast(message) {
+    const element = $("#toast");
+    element.textContent = message;
+    element.classList.add("show");
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => element.classList.remove("show"), 1800);
+  }
+
+  function initializeCategories() {
+    const categories = [...new Set(words.map((word) => word.category))];
+    const options = ['<option value="all">全部分类</option>']
+      .concat(categories.map((category) => `<option value="${category}">${category}</option>`))
+      .join("");
+    $("#categoryFilter").innerHTML = options;
+    $("#libraryCategory").innerHTML = options;
+  }
+
+  function progressFor(word) {
+    return state.progress[word.id] || { level: 0, due: 0, seen: 0 };
+  }
+
+  function updateStats() {
+    let mastered = 0;
+    let learning = 0;
+    words.forEach((word) => {
+      const progress = progressFor(word);
+      if (progress.level >= 3) mastered += 1;
+      else if (progress.seen > 0) learning += 1;
+    });
+    const unseen = Math.max(0, words.length - mastered - learning);
+    $("#masteredStat").textContent = mastered;
+    $("#learningStat").textContent = learning;
+    $("#unseenStat").textContent = unseen;
+    $("#totalStat").textContent = `共 ${words.length} 词`;
+    $("#masteredPercent").textContent = `${words.length ? Math.round(mastered / words.length * 100) : 0}%`;
+
+    const today = state.todayReviewed[todayKey()] || [];
+    $("#todayCount").textContent = today.length;
+    $("#dailyGoalText").textContent = state.dailyGoal;
+    $("#goalLabel").textContent = state.dailyGoal;
+    $("#dailyGoal").value = state.dailyGoal;
+    $("#goalProgress").style.width = `${Math.min(100, today.length / state.dailyGoal * 100)}%`;
+    $("#streakCount").textContent = `${calculateStreak()} 天`;
+  }
+
+  function calculateStreak() {
+    const unique = new Set(state.studyDates || []);
+    let streak = 0;
+    const cursor = new Date();
+    if (!unique.has(cursor.toISOString().slice(0, 10))) cursor.setDate(cursor.getDate() - 1);
+    while (unique.has(cursor.toISOString().slice(0, 10))) {
+      streak += 1;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    return streak;
+  }
+
+  function markToday(wordId) {
+    const key = todayKey();
+    state.todayReviewed[key] ||= [];
+    if (!state.todayReviewed[key].includes(wordId)) state.todayReviewed[key].push(wordId);
+    if (!state.studyDates.includes(key)) state.studyDates.push(key);
+    Object.keys(state.todayReviewed).forEach((date) => {
+      if (Date.now() - new Date(date).getTime() > 45 * DAY) delete state.todayReviewed[date];
+    });
+  }
+
+  function switchView(view) {
+    currentView = view;
+    const titles = { study: "闪卡学习", quiz: "快速测验", library: "完整词库" };
+    $(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.view === view));
+    $(".view").forEach((section) => section.classList.remove("active"));
+    $(`#${view}View`).classList.add("active");
+    $("#pageTitle").textContent = titles[view];
+    if (view === "quiz") renderQuiz();
+    if (view === "library") renderLibrary();
+  }
+
+  function buildStudyQueue(resetIndex = true) {
+    const category = $("#categoryFilter").value || "all";
+    const now = Date.now();
+    let queue = words.filter((word) => category === "all" || word.category === category);
+    if (studyScope === "starred") queue = queue.filter((word) => state.starred.includes(word.id));
+    if (studyScope === "due") queue = queue.filter((word) => {
+      const progress = progressFor(word);
+      return progress.seen === 0 || progress.due <= now;
+    });
+    if (shuffled) queue = shuffledCopy(queue);
+    studyQueue = queue;
+    if (resetIndex) studyIndex = 0;
+    else if (studyIndex >= studyQueue.length) studyIndex = 0;
+    renderStudyCard();
+  }
+
+  function renderStudyCard() {
+    const empty = studyQueue.length === 0;
+    $("#emptyStudy").classList.toggle("hidden", !empty);
+    $("#studyStage").classList.toggle("hidden", empty);
+    if (empty) return;
+
+    const word = studyQueue[studyIndex];
+    $("#flashcard").classList.remove("flipped");
+    $("#cardCategory").textContent = word.category;
+    $("#cardIndex").textContent = studyIndex + 1;
+    $("#cardTotal").textContent = studyQueue.length;
+    $("#englishWord").textContent = word.english;
+    $("#answerWord").textContent = word.english;
+    $("#chineseMeaning").textContent = word.chinese;
+    $("#phraseHint").textContent = word.isPhrase ? "固定词组 · 注意整体记忆" : "核心单词 · 注意拼写与大小写";
+    updateStarButtons(word.id);
+  }
+
+  function revealCard() {
+    if (!studyQueue.length) return;
+    $("#flashcard").classList.add("flipped");
+  }
+
+  function currentStudyWord() {
+    return studyQueue[studyIndex];
+  }
+
+  function rateCurrent(rating) {
+    const word = currentStudyWord();
+    if (!word || !$("#flashcard").classList.contains("flipped")) return;
+    const previous = progressFor(word);
+    let level = previous.level || 0;
+    let due = Date.now();
+    if (rating === "again") {
+      level = Math.max(0, level - 1);
+      due += 5 * 60 * 1000;
+    } else if (rating === "hard") {
+      level = Math.max(1, level);
+      due += 12 * 60 * 60 * 1000;
+    } else {
+      level += 1;
+      const intervals = [1, 3, 7, 14, 30, 60];
+      due += intervals[Math.min(level - 1, intervals.length - 1)] * DAY;
+    }
+    state.progress[word.id] = { level, due, seen: (previous.seen || 0) + 1, last: Date.now() };
+    markToday(word.id);
+    save();
+    updateStats();
+
+    if (studyScope === "due") {
+      buildStudyQueue(false);
+    } else {
+      studyIndex = (studyIndex + 1) % studyQueue.length;
+      renderStudyCard();
+    }
+  }
+
+  function toggleStar(wordId) {
+    const id = Number(wordId);
+    const index = state.starred.indexOf(id);
+    if (index >= 0) {
+      state.starred.splice(index, 1);
+      toast("已取消收藏");
+    } else {
+      state.starred.push(id);
+      toast("已加入收藏");
+    }
+    save();
+    updateStarButtons(id);
+    if (currentView === "library") renderLibrary();
+    if (studyScope === "starred") buildStudyQueue(false);
+  }
+
+  function updateStarButtons(wordId) {
+    const starred = state.starred.includes(Number(wordId));
+    [$("#starButton"), $("#starButtonBack")].forEach((button) => {
+      button.textContent = starred ? "★" : "☆";
+      button.classList.toggle("starred", starred);
+    });
+  }
+
+  function speak(text) {
+    if (!("speechSynthesis" in window)) return toast("当前浏览器不支持朗读");
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.rate = 0.82;
+    speechSynthesis.speak(utterance);
+  }
+
+  function pickQuizWord() {
+    if (!words.length) return null;
+    let candidate = words[Math.floor(Math.random() * words.length)];
+    if (quizWord && words.length > 1) {
+      while (candidate.id === quizWord.id) candidate = words[Math.floor(Math.random() * words.length)];
+    }
+    return candidate;
+  }
+
+  function renderQuiz(forceNew = false) {
+    if (!quizWord || forceNew) quizWord = pickQuizWord();
+    if (!quizWord) return;
+    quizLocked = false;
+    $("#quizCategory").textContent = quizWord.category;
+    $("#quizWord").textContent = quizWord.english;
+    $("#quizFeedback").textContent = "";
+    $("#nextQuiz").classList.add("hidden");
+
+    const distractors = shuffledCopy(words.filter((word) => word.id !== quizWord.id && word.chinese !== quizWord.chinese)).slice(0, 3);
+    const options = shuffledCopy([quizWord, ...distractors]);
+    $("#quizOptions").innerHTML = options.map((word) => (
+      `<button class="quiz-option" data-id="${word.id}">${word.chinese}</button>`
+    )).join("");
+    $(".quiz-option").forEach((button) => button.addEventListener("click", () => answerQuiz(button)));
+    updateQuizStats();
+  }
+
+  function answerQuiz(button) {
+    if (quizLocked) return;
+    quizLocked = true;
+    const selectedId = Number(button.dataset.id);
+    const correct = selectedId === quizWord.id;
+    quizStats.answered += 1;
+    quizStats.correct += correct ? 1 : 0;
+    quizStats.streak = correct ? quizStats.streak + 1 : 0;
+    $(".quiz-option").forEach((option) => {
+      option.disabled = true;
+      if (Number(option.dataset.id) === quizWord.id) option.classList.add("correct");
+    });
+    if (!correct) button.classList.add("wrong");
+    $("#quizFeedback").textContent = correct ? "答对了，很稳。" : `正确答案：${quizWord.chinese}`;
+    $("#quizFeedback").style.color = correct ? "var(--green)" : "var(--danger)";
+    $("#nextQuiz").classList.remove("hidden");
+
+    const progress = progressFor(quizWord);
+    state.progress[quizWord.id] = {
+      level: correct ? Math.max(1, progress.level || 0) : Math.max(0, (progress.level || 0) - 1),
+      due: correct ? Date.now() + DAY : Date.now(),
+      seen: (progress.seen || 0) + 1,
+      last: Date.now()
+    };
+    markToday(quizWord.id);
+    save();
+    updateStats();
+    updateQuizStats();
+  }
+
+  function updateQuizStats() {
+    $("#quizCorrect").textContent = quizStats.correct;
+    $("#quizAnswered").textContent = quizStats.answered;
+    $("#quizStreak").textContent = quizStats.streak;
+    $("#quizAccuracy").textContent = `${quizStats.answered ? Math.round(quizStats.correct / quizStats.answered * 100) : 0}%`;
+  }
+
+  function renderLibrary() {
+    const query = $("#searchInput").value.trim().toLowerCase();
+    const category = $("#libraryCategory").value || "all";
+    const starredOnly = $("#starredOnly").checked;
+    const filtered = words.filter((word) => {
+      const matchesQuery = !query || word.english.toLowerCase().includes(query) || word.chinese.toLowerCase().includes(query);
+      const matchesCategory = category === "all" || word.category === category;
+      const matchesStar = !starredOnly || state.starred.includes(word.id);
+      return matchesQuery && matchesCategory && matchesStar;
+    });
+    $("#resultCount").textContent = filtered.length;
+    $("#wordGrid").innerHTML = filtered.map((word) => {
+      const starred = state.starred.includes(word.id);
+      return `<article class="word-row">
+        <strong>${word.english}</strong>
+        <p>${word.chinese}</p>
+        <small>${word.category}</small>
+        <button class="${starred ? "starred" : ""}" data-star-id="${word.id}" aria-label="收藏 ${word.english}">${starred ? "★" : "☆"}</button>
+      </article>`;
+    }).join("") || '<div class="empty-state"><h2>没有匹配结果</h2><p>换一个关键词试试看。</p></div>';
+    $('[data-star-id]').forEach((button) => button.addEventListener("click", () => toggleStar(button.dataset.starId)));
+  }
+
+  function bindEvents() {
+    $(".nav-item").forEach((button) => button.addEventListener("click", () => switchView(button.dataset.view)));
+    $(".segment").forEach((button) => button.addEventListener("click", () => {
+      studyScope = button.dataset.scope;
+      $(".segment").forEach((item) => item.classList.toggle("active", item === button));
+      buildStudyQueue();
+    }));
+    $("#categoryFilter").addEventListener("change", () => buildStudyQueue());
+    $("#shuffleButton").addEventListener("click", () => {
+      shuffled = !shuffled;
+      $("#shuffleButton").textContent = shuffled ? "已随机" : "随机顺序";
+      buildStudyQueue();
+    });
+    $("#revealButton").addEventListener("click", (event) => { event.stopPropagation(); revealCard(); });
+    $("#flashcard").addEventListener("click", (event) => {
+      if (!event.target.closest("button")) revealCard();
+    });
+    $(".rating").forEach((button) => button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      rateCurrent(button.dataset.rating);
+    }));
+    [$("#speakButton"), $("#speakButtonBack")].forEach((button) => button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const word = currentStudyWord();
+      if (word) speak(word.english);
+    }));
+    [$("#starButton"), $("#starButtonBack")].forEach((button) => button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const word = currentStudyWord();
+      if (word) toggleStar(word.id);
+    }));
+    $("#nextQuiz").addEventListener("click", () => renderQuiz(true));
+    $("#restartQuiz").addEventListener("click", () => {
+      quizStats = { correct: 0, answered: 0, streak: 0 };
+      renderQuiz(true);
+    });
+    $("#searchInput").addEventListener("input", renderLibrary);
+    $("#libraryCategory").addEventListener("change", renderLibrary);
+    $("#starredOnly").addEventListener("change", renderLibrary);
+    $("#dailyGoal").addEventListener("input", (event) => {
+      state.dailyGoal = Number(event.target.value);
+      save();
+      updateStats();
+    });
+    $("#themeToggle").addEventListener("click", () => {
+      state.theme = state.theme === "dark" ? "light" : "dark";
+      applyTheme();
+      save();
+    });
+    $("#resetButton").addEventListener("click", () => {
+      if (!confirm("确定清空全部学习记录、收藏和统计吗？")) return;
+      state = { ...defaultState, progress: {}, starred: [], studyDates: [], todayReviewed: {} };
+      save();
+      updateStats();
+      buildStudyQueue();
+      toast("学习记录已重置");
+    });
+    document.addEventListener("keydown", (event) => {
+      if (currentView !== "study" || ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+      if (event.code === "Space") {
+        event.preventDefault();
+        revealCard();
+      }
+      if (event.key === "1") rateCurrent("again");
+      if (event.key === "2") rateCurrent("hard");
+      if (event.key === "3") rateCurrent("known");
+    });
+  }
+
+  function applyTheme() {
+    document.documentElement.dataset.theme = state.theme;
+    $("#themeToggle").textContent = state.theme === "dark" ? "☀" : "☾";
+  }
+
+  function init() {
+    if (!words.length) {
+      document.body.innerHTML = '<main class="empty-state"><h1>词库加载失败</h1><p>请确认 vocab-data.js 与网页位于同一目录。</p></main>';
+      return;
+    }
+    initializeCategories();
+    applyTheme();
+    bindEvents();
+    updateStats();
+    buildStudyQueue();
+    renderLibrary();
+  }
+
+  init();
+})();
+
+</script>
+</body>
+</html>
