@@ -506,7 +506,8 @@ kbd { padding: 3px 7px; border: 1px solid var(--line); border-bottom-width: 2px;
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script>
+
+  <script>
 window.ECOLOGY_VOCAB = [
   {
     "id": 1,
@@ -1617,7 +1618,7 @@ window.ECOLOGY_VOCAB = [
 ];
 
 </script>
-<script>
+  <script>
 (() => {
   "use strict";
 
@@ -1653,7 +1654,7 @@ window.ECOLOGY_VOCAB = [
   let quizStats = { correct: 0, answered: 0, streak: 0 };
 
   const $ = (selector) => document.querySelector(selector);
-  const $ = (selector) => [...document.querySelectorAll(selector)];
+  const $$ = (selector) => [...document.querySelectorAll(selector)];
   const todayKey = () => new Date().toISOString().slice(0, 10);
   const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   const byId = (id) => words.find((word) => word.id === Number(id));
@@ -1736,8 +1737,8 @@ window.ECOLOGY_VOCAB = [
   function switchView(view) {
     currentView = view;
     const titles = { study: "闪卡学习", quiz: "快速测验", library: "完整词库" };
-    $(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.view === view));
-    $(".view").forEach((section) => section.classList.remove("active"));
+    $$(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.view === view));
+    $$(".view").forEach((section) => section.classList.remove("active"));
     $(`#${view}View`).classList.add("active");
     $("#pageTitle").textContent = titles[view];
     if (view === "quiz") renderQuiz();
@@ -1873,7 +1874,7 @@ window.ECOLOGY_VOCAB = [
     $("#quizOptions").innerHTML = options.map((word) => (
       `<button class="quiz-option" data-id="${word.id}">${word.chinese}</button>`
     )).join("");
-    $(".quiz-option").forEach((button) => button.addEventListener("click", () => answerQuiz(button)));
+    $$(".quiz-option").forEach((button) => button.addEventListener("click", () => answerQuiz(button)));
     updateQuizStats();
   }
 
@@ -1885,7 +1886,7 @@ window.ECOLOGY_VOCAB = [
     quizStats.answered += 1;
     quizStats.correct += correct ? 1 : 0;
     quizStats.streak = correct ? quizStats.streak + 1 : 0;
-    $(".quiz-option").forEach((option) => {
+    $$(".quiz-option").forEach((option) => {
       option.disabled = true;
       if (Number(option.dataset.id) === quizWord.id) option.classList.add("correct");
     });
@@ -1934,14 +1935,14 @@ window.ECOLOGY_VOCAB = [
         <button class="${starred ? "starred" : ""}" data-star-id="${word.id}" aria-label="收藏 ${word.english}">${starred ? "★" : "☆"}</button>
       </article>`;
     }).join("") || '<div class="empty-state"><h2>没有匹配结果</h2><p>换一个关键词试试看。</p></div>';
-    $('[data-star-id]').forEach((button) => button.addEventListener("click", () => toggleStar(button.dataset.starId)));
+    $$('[data-star-id]').forEach((button) => button.addEventListener("click", () => toggleStar(button.dataset.starId)));
   }
 
   function bindEvents() {
-    $(".nav-item").forEach((button) => button.addEventListener("click", () => switchView(button.dataset.view)));
-    $(".segment").forEach((button) => button.addEventListener("click", () => {
+    $$(".nav-item").forEach((button) => button.addEventListener("click", () => switchView(button.dataset.view)));
+    $$(".segment").forEach((button) => button.addEventListener("click", () => {
       studyScope = button.dataset.scope;
-      $(".segment").forEach((item) => item.classList.toggle("active", item === button));
+      $$(".segment").forEach((item) => item.classList.toggle("active", item === button));
       buildStudyQueue();
     }));
     $("#categoryFilter").addEventListener("change", () => buildStudyQueue());
@@ -1954,7 +1955,7 @@ window.ECOLOGY_VOCAB = [
     $("#flashcard").addEventListener("click", (event) => {
       if (!event.target.closest("button")) revealCard();
     });
-    $(".rating").forEach((button) => button.addEventListener("click", (event) => {
+    $$(".rating").forEach((button) => button.addEventListener("click", (event) => {
       event.stopPropagation();
       rateCurrent(button.dataset.rating);
     }));
