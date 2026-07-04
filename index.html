@@ -210,6 +210,7 @@ select { padding: 9px 32px 9px 11px; }
 .card-meta { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 10px; color: var(--muted); font-size: 12px; }
 .category-chip { display: inline-flex; align-items: center; min-height: 26px; padding: 5px 10px; border-radius: 999px; color: var(--green); background: var(--green-soft); font-size: 11px; font-weight: 700; }
 .flashcard { position: relative; height: 470px; outline: none; perspective: 1500px; cursor: pointer; }
+.flashcard.changing { pointer-events: none; }
 .card-face {
   position: absolute;
   inset: 0;
@@ -1761,14 +1762,9 @@ window.ECOLOGY_VOCAB = [
     renderStudyCard();
   }
 
-  function renderStudyCard() {
-    const empty = studyQueue.length === 0;
-    $("#emptyStudy").classList.toggle("hidden", !empty);
-    $("#studyStage").classList.toggle("hidden", empty);
-    if (empty) return;
+  let cardTransitionTimer = null;
 
-    const word = studyQueue[studyIndex];
-    $("#flashcard").classList.remove("flipped");
+  function paintStudyCard(word) {
     $("#cardCategory").textContent = word.category;
     $("#cardIndex").textContent = studyIndex + 1;
     $("#cardTotal").textContent = studyQueue.length;
@@ -1779,8 +1775,40 @@ window.ECOLOGY_VOCAB = [
     updateStarButtons(word.id);
   }
 
+  function renderStudyCard() {
+    const empty = studyQueue.length === 0;
+    $("#emptyStudy").classList.toggle("hidden", !empty);
+    $("#studyStage").classList.toggle("hidden", empty);
+    const flashcard = $("#flashcard");
+
+    clearTimeout(cardTransitionTimer);
+    cardTransitionTimer = null;
+
+    if (empty) {
+      flashcard.classList.remove("flipped", "changing");
+      return;
+    }
+
+    const word = studyQueue[studyIndex];
+    if (flashcard.classList.contains("flipped")) {
+      flashcard.classList.add("changing");
+      flashcard.classList.remove("flipped");
+
+      // 等背面越过侧边、完全不可见后，再换成下一个词的内容。
+      cardTransitionTimer = setTimeout(() => {
+        paintStudyCard(word);
+        flashcard.classList.remove("changing");
+        cardTransitionTimer = null;
+      }, 350);
+    } else {
+      flashcard.classList.remove("changing");
+      paintStudyCard(word);
+    }
+  }
+
   function revealCard() {
     if (!studyQueue.length) return;
+    if ($("#flashcard").classList.contains("changing")) return;
     $("#flashcard").classList.add("flipped");
   }
 
